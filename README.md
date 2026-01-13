@@ -17,7 +17,7 @@ and engineering decisions**, rather than step-by-step tutorials.
 
 ## Contents
 
-- **terraform/** — Infrastructure as Code examples (VPC, compute, Kubernetes, load balancing)
+- **terraform/** — Infrastructure as Code examples (VPC, VM, DB)
 - **k8s/** — Managed Kubernetes deployment and autoscaling scenarios
 - **networking/** — VPC design, security groups, NAT, and load balancing
 - **databases/** — PostgreSQL and ClickHouse usage in Yandex Cloud
