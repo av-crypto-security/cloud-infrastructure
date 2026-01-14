@@ -1,0 +1,9 @@
+yc_token = "YOUR_TOKEN"
+cloud_id = "YOUR_CLOUD_ID"
+folder_id = "YOUR_FOLDER_ID"
+zone = "ru-central1-a"
+
+image_id = "your_image_id"
+ssh_public_key_path = "/home/user/.ssh/id_rsa.pub"
+postgres_user = "app_user"
+postgres_password = "CHANGE_ME"
