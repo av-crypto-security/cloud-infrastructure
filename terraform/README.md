@@ -29,7 +29,7 @@ terraform/
 ├── main.tf # Infrastructure resources
 ├── outputs.tf # Output values
 ├── terraform.tfvars.example # Example variables file
-
+```
 
 ## Usage
 
