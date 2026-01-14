@@ -35,17 +35,22 @@ terraform/
 
 1. Clone the repository
 2. Create a variables file:
-
-```bash
+```
 cp terraform.tfvars.example terraform.tfvars
+```
 3. Fill in real values in terraform.tfvars
 4. Initialize Terraform:
+```
 terraform init
+```
 5. Preview changes:
+```
 terraform plan
+```
 6. Apply infrastructure:
+```
 terraform apply
-
+```
 
 ## Notes
 
@@ -58,5 +63,3 @@ Yandex Cloud Terraform examples
 ## Disclaimer
 
 This repository is intended for educational and demonstration purposes.
-
-
