@@ -1,4 +1,4 @@
-yc_token = "YOUR_TOKEN"
+sa_key_file = "./sa-key.json"
 cloud_id = "YOUR_CLOUD_ID"
 folder_id = "YOUR_FOLDER_ID"
 zone = "ru-central1-a"
