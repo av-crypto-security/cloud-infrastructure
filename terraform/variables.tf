@@ -1,7 +1,6 @@
 variable "sa_key_file" {
   type        = string
   description = "Path to service account key JSON"
-  sensitive = true
 }
 
 variable "cloud_id" {
@@ -34,4 +33,5 @@ variable "postgres_password" {
   type = string
   sensitive = true
 }
+
 
