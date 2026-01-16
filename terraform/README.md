@@ -79,3 +79,8 @@ terraform apply
 ## Disclaimer
 
 This repository is intended for educational and demonstration purposes.
+
+## Security
+
+Secrets are not stored in the repository.
+Service account keys and sensitive variables are excluded via .gitignore.
