@@ -1,14 +1,16 @@
-variable "yc_token" {
+variable "sa_key_file" {
   type        = string
-  description = "Yandex Cloud OAuth token"
-  sensitive   = true
+  description = "Path to service account key JSON"
 }
+
 variable "cloud_id" {
   type = string
 }
+
 variable "folder_id" {
   type = string
 }
+
 variable "zone" {
   type    = string
   default = "ru-central1-a"
