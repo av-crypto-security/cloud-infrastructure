@@ -26,7 +26,7 @@ The following resources are provisioned:
 terraform/
 ├── provider.tf # Provider and backend configuration
 ├── variables.tf # Variable declarations
-├── main.tf # Infrastructure resources
+├── main.tf # Infrastructure assembling
 ├── outputs.tf # Output values
 ├── terraform.tfvars.example # Example variables file
 │
