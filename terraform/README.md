@@ -18,13 +18,13 @@ The following resources are provisioned:
 
 - Terraform >= 1.4
 - Yandex Cloud account
-- OAuth token or service account
+- Yandex Cloud service account (recommended) or OAuth token
 - Configured YC CLI (optional)
 
 ## Structure
 ```
 terraform/
-├── provider.tf # Provider and backend configuration
+├── provider.tf # Provider configuration
 ├── variables.tf # Variable declarations
 ├── main.tf # Infrastructure assembling
 ├── outputs.tf # Output values
@@ -54,27 +54,27 @@ terraform/
 ```
 cp terraform.tfvars.example terraform.tfvars
 ```
-3. Fill in real values in terraform.tfvars
-4. Initialize Terraform:
+3. Place service account key file (sa-key.json) locally (not committed)
+4. Fill in real values in terraform.tfvars
+5. Initialize Terraform:
 ```
 terraform init
 ```
-5. Preview changes:
+6. Preview changes:
 ```
 terraform plan
 ```
-6. Apply infrastructure:
+7. Apply infrastructure:
 ```
 terraform apply
 ```
 
 ## Notes
 
-terraform.tfvars must not be committed
-All sensitive values are marked as sensitive
-Configuration is adapted and composed from publicly available
-Yandex Cloud Terraform examples
-
+- terraform.tfvars must not be committed
+- sa-key.json must not be committed
+- All sensitive values are marked as sensitive
+- Configuration is adapted from public Yandex Cloud Terraform examples
 
 ## Disclaimer
 
