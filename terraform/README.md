@@ -29,6 +29,22 @@ terraform/
 ├── main.tf # Infrastructure resources
 ├── outputs.tf # Output values
 ├── terraform.tfvars.example # Example variables file
+│
+├── modules/
+│   ├── vpc/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   │
+│   ├── vm/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   │
+│   └── postgresql/
+│       ├── main.tf
+│       ├── variables.tf
+│       └── outputs.tf
 ```
 
 ## Usage
