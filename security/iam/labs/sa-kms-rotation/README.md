@@ -59,4 +59,4 @@ This confirms correct IAM delegation and secure key management.
 The screenshot below shows that the key rotation
 operation was performed by the service account.
 
-![KMS rotation audit](kms-rotation-audit.png)
+![KMS rotation audit](./kms-rotation-audit.png)
