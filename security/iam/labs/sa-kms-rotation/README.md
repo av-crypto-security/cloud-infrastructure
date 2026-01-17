@@ -53,3 +53,10 @@ After rotation:
 - The initiator is the service account
 
 This confirms correct IAM delegation and secure key management.
+
+## Audit Evidence
+
+The screenshot below shows that the key rotation
+operation was performed by the service account.
+
+![KMS rotation audit](/kms-rotation-audit.png)
