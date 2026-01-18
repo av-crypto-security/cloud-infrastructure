@@ -83,5 +83,3 @@ Blocked traffic paths:
 * Internet → Web Servers (direct)
 * Internet → Database
 * Web Servers → Internet (unless explicitly required)
-
-Do not include IP addresses in the diagram.Focus on **trust boundaries and allowed paths**.
