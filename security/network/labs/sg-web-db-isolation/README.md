@@ -62,3 +62,16 @@ This lab can be extended with:
 * TLS termination and certificate management
 
 These extensions are intentionally left out of the base lab.
+
+## Hands-on validation
+
+Security Group behavior was validated using TCP connectivity checks
+from different network locations.
+
+Results:
+
+- Direct access to the database from an administrative VM was blocked
+- Access from the web VM was explicitly allowed via SG-to-SG rules
+
+This confirms correct network isolation and enforcement of
+the principle of least privilege.
