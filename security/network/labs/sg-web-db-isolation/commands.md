@@ -87,6 +87,10 @@ yc vpc security-group update-rules <sg-web-id> \
 
 yc vpc security-group update-rules <sg-db-id> \
   --add-rule "direction=ingress,protocol=tcp,port=3306,security-group-id=<sg-web-id>"
+
+
+yc vpc security-group get sg-web
+yc vpc security-group get sg-db
 ```
 
 ## 6. Web VM and DB creation examples
@@ -122,7 +126,4 @@ sudo apt install -y netcat-openbsd
 ### Test from admin VM (should be blocked), test from web VM (should succeed)
 ```bash
 nc -zv <db-fqdn-or-ip> 3306
-
-yc vpc security-group get sg-web
-yc vpc security-group get sg-db
 ```
