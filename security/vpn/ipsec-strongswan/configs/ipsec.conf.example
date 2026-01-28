@@ -1,1 +1,28 @@
+# Example strongSwan IPSec configuration
+# This file is for reference only. Do not use in production.
 
+config setup
+    uniqueids=yes
+    strictcrlpolicy=no
+
+conn cloud-to-onprem
+    authby=secret
+    left=%defaultroute
+    leftid=<cloud_public_ip>
+    leftsubnet=10.xxx.0.0/24
+
+    right=<onprem_public_ip>
+    rightsubnet=192.xxx.0.0/24
+
+    ike=aes256-sha2_256-modp1024!
+    esp=aes256-sha2_256!
+
+    ikelifetime=1h
+    lifetime=8h
+    keyingtries=0
+
+    dpddelay=30
+    dpdtimeout=120
+    dpdaction=restart
+
+    auto=start
