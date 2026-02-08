@@ -27,3 +27,7 @@ yc compute instance-group update \
 
 ## Delete VM (self-healing test)
 yc compute instance delete <VM_NAME>
+
+## Delete Instance Group
+yc compute instance-group delete <GROUP_NAME>
+yc load-balancer network-load-balancer delete <LB_NAME>
