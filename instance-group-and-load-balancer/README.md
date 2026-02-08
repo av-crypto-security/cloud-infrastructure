@@ -3,35 +3,39 @@
 This lab demonstrates how to deploy a highly available web application
 using Yandex Cloud Instance Groups and a Network Load Balancer.
 The infrastructure is described declaratively using a YAML specification,
-which is an introductory form of Infrastructure as Code (IaC).
+which represents an early form of Infrastructure as Code (IaC).
 
 ## Architecture
 
-- Instance Group with a fixed size of 2 virtual machines
+- Instance Group with a fixed size of **3 virtual machines**
 - Ubuntu 22.04 virtual machines with NGINX installed via cloud-init
 - Network Load Balancer (L4, TCP) distributing traffic on port 80
 - Health checks to automatically exclude unhealthy instances
+- Rolling updates with no downtime
+
 ```
 Internet
    |
 [ Load Balancer :80 ]
    |
----------------------
-|                   |
-VM-1 (NGINX)     VM-2 (NGINX)
+-----------------------------------------
+|                   |                   |
+VM-1 (NGINX)     VM-2 (NGINX)     VM-3 (NGINX)
 ```
+
 ## Key Concepts
 
-- Instance Groups as a self-healing mechanism
-- Declarative infrastructure with YAML specifications
-- Cloud-init for automatic software provisioning
-- Health checks and traffic failover
-- Rolling updates without downtime
+- Instance Groups as a **self-healing** mechanism
+- Declarative infrastructure using **YAML specifications**
+- Automatic provisioning with **cloud-init**
+- Health checks and automatic traffic failover
+- **Rolling updates** controlled by deployment policies
 
 ## Why YAML instead of Terraform?
 
 This lab intentionally uses native Yandex Cloud instance group
-specifications to demonstrate how declarative infrastructure
-and self-healing mechanisms work at a low level.
+specifications to demonstrate how declarative infrastructure,
+self-healing, and rolling updates work at a low level.
 Terraform is used in other parts of this repository to manage
-the same resources in a more scalable, reusable, and production-ready way.
+similar resources in a more scalable, reusable,
+and production-ready way.
