@@ -5,6 +5,10 @@ using Yandex Cloud Instance Groups and a Network Load Balancer.
 The infrastructure is described declaratively using a YAML specification,
 which represents an early form of Infrastructure as Code (IaC).
 
+This lab demonstrates L4 load balancing using Yandex Cloud Network Load Balancer.
+NGINX is used only as a backend web server to verify traffic distribution and health checks.
+L7 load balancing is covered separately using managed HTTP load balancers or Kubernetes ingress.
+
 ## Architecture
 
 - Instance Group with a fixed size of **3 virtual machines**
