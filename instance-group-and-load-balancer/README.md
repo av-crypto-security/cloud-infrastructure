@@ -30,7 +30,8 @@ VM-1 (NGINX)     VM-2 (NGINX)
 
 ## Why YAML instead of Terraform?
 
-This lab intentionally uses native Yandex Cloud specifications
-to demonstrate how instance groups work under the hood.
-Terraform is used to manage the same resources
-in a more scalable and reusable way.
+This lab intentionally uses native Yandex Cloud instance group
+specifications to demonstrate how declarative infrastructure
+and self-healing mechanisms work at a low level.
+Terraform is used in other parts of this repository to manage
+the same resources in a more scalable, reusable, and production-ready way.
