@@ -1,4 +1,4 @@
-# Commands used in this lab
+# Commands used
 
 ## Create Instance Group
 yc compute instance-group create --file specification.yaml
