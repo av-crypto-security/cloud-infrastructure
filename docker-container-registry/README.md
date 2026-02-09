@@ -1,47 +1,79 @@
-# Docker Image and Yandex Container Registry
+# Docker Image and Container Registry (Yandex Cloud)
 
-This is to demonstrate how to build a Docker image,
-push it to Yandex Container Registry,
-and run a virtual machine using a container-based image.
+This repository demonstrates building a Docker image,
+publishing it to Yandex Container Registry,
+and running a virtual machine based on a container image.
 
-The goal is to show how containers allow delivering
-preconfigured software without manual installation
-inside virtual machines.
-
----
-
-## Prerequisites
-
-- Ubuntu Linux host
-- Yandex Cloud account
-- `yc` CLI configured
-- Docker Engine installed
+The lab shows how containers can be used
+to deliver preconfigured software as an immutable artifact
+without manual installation on virtual machines.
 
 ---
 
-## 1. Install Docker Engine
+## What is implemented
 
-Official Docker installation guide:
-https://docs.docker.com/engine/install/ubuntu/
+- Docker image with NGINX
+- Private Container Registry in Yandex Cloud
+- Image push and pull via authenticated registry access
+- Virtual machine launched from a container image
+- No manual configuration inside the VM
 
-Short version:
+---
 
-```bash
-sudo apt remove docker docker-engine docker.io containerd runc
-sudo apt update
-sudo apt install -y ca-certificates curl gnupg lsb-release
+## Architecture
+```
+Dockerfile
+↓
+Docker Image
+↓
+Yandex Container Registry
+↓
+Container Optimized VM
+↓
+NGINX running on VM
+```
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-  | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-https://download.docker.com/linux/ubuntu \
-$(lsb_release -cs) stable" \
-| sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+---
 
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io
-sudo systemctl enable docker
-sudo systemctl start docker
+## Key concepts demonstrated
 
+- Docker image vs container
+- Immutable infrastructure
+- Container registry as an artifact store
+- Separation of build and runtime environments
+- Image-based VM provisioning
+- Reproducible infrastructure components
+
+---
+
+## Why containers here
+
+This approach removes the need to:
+- SSH into virtual machines
+- Manually install software
+- Maintain mutable VM state
+
+Instead, the application and its environment
+are delivered as a single immutable image,
+which improves reproducibility and reliability.
+
+---
+
+## Result
+
+A virtual machine is started directly from a Docker image,
+and NGINX becomes available immediately after VM startup.
+
+![NGINX running](./nginx-running.png)
+
+---
+
+## Notes
+
+- All commands used to build and publish the image
+  are documented in `commands.md`
+- The same image can later be reused in:
+  - Kubernetes
+  - Instance Groups
+  - CI/CD pipelines
