@@ -65,7 +65,7 @@ which improves reproducibility and reliability.
 A virtual machine is started directly from a Docker image,
 and NGINX becomes available immediately after VM startup.
 
-![NGINX running](./nginx-running.png)
+![NGINX running](./docker-build-push-nginx-running.png)
 
 ---
 
