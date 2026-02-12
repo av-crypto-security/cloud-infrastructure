@@ -15,6 +15,7 @@ The folder defines:
 - resource quotas,
 - billing scope,
 - visibility and administrative access.
+  
 Placing clusters in dedicated folders is a governance practice
 that enables separation between environments
 (dev / staging / production).
