@@ -61,10 +61,12 @@ Zonal master:
 - runs in a single availability zone,
 - lower cost,
 - single point of failure at zone level.
+
 Regional master:
 - distributed across multiple zones,
 - higher availability,
 - recommended for production.
+
 For learning and non-critical workloads,
 a zonal cluster is sufficient.
 
@@ -76,10 +78,12 @@ Release channels determine:
 - available Kubernetes versions,
 - upgrade behavior,
 - lifecycle stability.
+
 Typical characteristics:
 - RAPID — frequent automatic updates
 - REGULAR — balanced stability and update cadence
 - STABLE — conservative update policy
+
 The release channel cannot be changed
 after cluster creation.
 Version alignment between control plane
@@ -92,10 +96,12 @@ and node groups reduces operational risk.
 Cluster update policy controls when:
 - control plane upgrades occur,
 - node groups are updated.
+
 Important characteristics:
 - Regional masters remain available during updates.
 - Zonal masters may be temporarily unavailable.
 - Node upgrades recreate nodes and reschedule pods.
+
 Understanding update behavior is critical
 for planning maintenance windows
 and workload disruption tolerance.
@@ -108,10 +114,12 @@ Managed Kubernetes can integrate
 with Key Management Service (KMS)
 to encrypt sensitive cluster data,
 including Kubernetes secrets stored in etcd.
+
 Enabling KMS provides:
 - protection of credentials at rest,
 - improved compliance posture,
 - reduced impact of storage compromise.
+
 Clusters can function without KMS,
 but encryption at rest is recommended
 for production workloads.
@@ -123,12 +131,15 @@ for production workloads.
 Kubernetes assigns internal IP ranges for:
 - Pod networks,
 - Service networks.
+
 These CIDR ranges must not overlap
 with existing VPC address space.
+
 Improper CIDR planning can cause:
 - pod startup failures,
 - routing conflicts,
 - cross-network communication issues.
+
 Automatic allocation is acceptable for labs.
 Production environments require deliberate IP planning.
 
