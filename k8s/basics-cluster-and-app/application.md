@@ -45,8 +45,7 @@ kubectl config view
 If configuration is correct, kubectl is now connected to the cluster.
 
 ## 3. Create the Deployment manifest
-Create a file my-nginx.yaml
-(The example manifest is available here: [my-nginx-example.yaml](my-nginx-example.yaml)):
+Create a file my-nginx.yaml:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -67,6 +66,7 @@ spec:
         image: cr.yandex/<registry_id>/ubuntu-nginx:latest
 ```
 Replace <registry_id> with your Container Registry identifier.
+A portable, registry-independent demo Deployment manifest is provided in the repository: [my-nginx.yaml](my-nginx.yaml)
 
 ## 4. Apply the manifest
 Create or update the resource:
