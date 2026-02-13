@@ -66,6 +66,7 @@ spec:
         image: cr.yandex/<registry_id>/ubuntu-nginx:latest
 ```
 Replace <registry_id> with your Container Registry identifier.
+
 A portable, registry-independent demo Deployment manifest is provided in the repository: [my-nginx.yaml](my-nginx.yaml)
 
 ## 4. Apply the manifest
