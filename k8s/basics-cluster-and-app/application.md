@@ -45,7 +45,7 @@ kubectl config view
 If configuration is correct, kubectl is now connected to the cluster.
 
 ## 3. Create the Deployment manifest
-Create a file my-nginx.yaml:
+Create a file `my-nginx.yaml`:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
