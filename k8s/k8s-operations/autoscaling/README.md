@@ -13,12 +13,12 @@ We will:
 
 
 ## Architecture
-
+```
 User → Load Balancer → Service → Deployment → Pods
                                     ↑
                                     |
                                   HPA
-
+```
 
 ## Why HPA?
 
