@@ -23,7 +23,7 @@ This document focuses on practical IAM role usage.
 
 # 2. Common Operational Tasks → Required Roles
 
-## 🔹 Create a Kubernetes cluster
+## Create a Kubernetes cluster
 
 **Role:**  
 `k8s.admin`
@@ -34,7 +34,7 @@ Allows creating and managing clusters.
 
 ---
 
-## 🔹 Create a public cluster / allow public access
+## Create a public cluster / allow public access
 
 **Role:**  
 `vpc.publicAdmin`
@@ -49,7 +49,7 @@ This role should be granted deliberately.
 
 ---
 
-## 🔹 Install system applications inside cluster
+## Install system applications inside cluster
 
 (e.g. Ingress controller, monitoring stack)
 
@@ -62,7 +62,7 @@ Use carefully.
 
 ---
 
-## 🔹 Create and manage applications in cluster
+## Create and manage applications in cluster
 
 (Deployments, Services, ConfigMaps)
 
@@ -78,7 +78,7 @@ Does NOT allow:
 
 ---
 
-## 🔹 Read-only access to cluster
+## Read-only access to cluster
 
 **Role:**  
 `k8s.viewer`
@@ -87,7 +87,7 @@ Allows observing cluster state without modifying resources.
 
 ---
 
-## 🔹 Push container images to registry
+## Push container images to registry
 
 **Role:**  
 `container-registry.images.pusher`
@@ -101,7 +101,7 @@ Recommended only for development folders.
 
 ---
 
-## 🔹 Pull container images from registry
+## Pull container images from registry
 
 **Role:**  
 `container-registry.images.puller`
@@ -114,7 +114,7 @@ Required for:
 
 ---
 
-## 🔹 Full registry management
+## Full registry management
 
 **Role:**  
 `container-registry.admin`
@@ -129,7 +129,7 @@ Typically used by DevOps/SRE.
 
 ---
 
-## 🔹 Connect cluster to VPC network
+## Connect cluster to VPC network
 
 **Role:**  
 `vpc.user`
@@ -141,7 +141,7 @@ Required for:
 
 ---
 
-## 🔹 Manage service accounts
+## Manage service accounts
 
 **Role:**  
 `iam.serviceAccounts.user`
@@ -161,7 +161,7 @@ Required to create public LoadBalancers.
 
 # 3. Typical Role Distribution
 
-## 👨‍💻 Developer
+## Developer
 
 - `k8s.cluster-api.editor`
 - `container-registry.images.pusher` (dev only)
@@ -169,7 +169,7 @@ Required to create public LoadBalancers.
 
 ---
 
-## ⚙ DevOps / SRE
+## DevOps / SRE
 
 - `k8s.admin`
 - `k8s.cluster-api.cluster-admin`
@@ -180,7 +180,7 @@ Required to create public LoadBalancers.
 
 ---
 
-## 🤖 CI/CD
+## CI/CD
 
 - `container-registry.images.pusher`
 - `container-registry.images.puller`
@@ -188,7 +188,7 @@ Required to create public LoadBalancers.
 
 ---
 
-## 🖥 Cluster Nodes
+## Cluster Nodes
 
 - `container-registry.images.puller`
 
