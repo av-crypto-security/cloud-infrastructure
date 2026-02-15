@@ -8,4 +8,4 @@ kubectl get svc my-loadbalancer
 watch kubectl get svc my-loadbalancer
 
 # Test connectivity
-curl http://<EXTERNAL-IP>
+curl http://<external_ip>
