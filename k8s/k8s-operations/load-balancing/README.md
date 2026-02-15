@@ -5,6 +5,11 @@ to the public internet using a Service of type `LoadBalancer`.
 
 We deploy an NGINX-based application and expose it via a cloud Network Load Balancer.
 
+## Status
+
+🚧 Work in progress.  
+Image registry permissions and production validation are being finalized.
+
 
 ## Why LoadBalancer?
 
