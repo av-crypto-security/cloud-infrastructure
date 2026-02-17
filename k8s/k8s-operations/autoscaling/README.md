@@ -76,8 +76,10 @@ done
 
 You will observe:
 
-- Pods increasing (HPA)
-- Nodes increasing (Cluster Autoscaler)
+- Pods increasing (managed by HPA)
+- If cluster resources are insufficient,
+  additional nodes may be provisioned
+  (managed by Cluster Autoscaler)
 
 
 ## Step 6 — Stop Load
@@ -89,6 +91,6 @@ Cluster will scale down automatically.
 
 ## Result
 
-- Application scales horizontally
-- Infrastructure scales automatically
+- Application scales horizontally via HPA
+- Infrastructure may scale automatically if Cluster Autoscaler is enabled
 - No manual intervention required
