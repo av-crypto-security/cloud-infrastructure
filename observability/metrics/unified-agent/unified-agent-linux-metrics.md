@@ -85,6 +85,9 @@ routes:
     channel:
       channel_ref:
         name: cloud_monitoring
+
+import:
+ - /etc/yandex/unified_agent/conf.d/*.yml
 ```
 
 ## Important Concept
