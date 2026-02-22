@@ -1,4 +1,4 @@
-# Prometheus Metrics Export (Yandex Monitoring → Prometheus → Grafana)
+# Metrics Export (Yandex Monitoring → Prometheus → Grafana)
 
 ## Overview
 
