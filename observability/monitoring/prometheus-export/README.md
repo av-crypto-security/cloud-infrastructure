@@ -1,8 +1,21 @@
 # Prometheus Metrics Export (Yandex Monitoring → Prometheus → Grafana)
 
-This section demonstrates how cloud metrics are exported to Prometheus and visualized in Grafana.
+## Overview
+
+This section demonstrates integration of Yandex Cloud Monitoring 
+with a self-hosted Prometheus instance.
+
+Prometheus follows the pull model and scrapes metrics from 
+the Yandex Monitoring Prometheus-compatible endpoint.
+
 Architecture:
-Yandex Monitoring → Prometheus → Grafana
+```
+Yandex Monitoring (managed) 
+        ↓  (Prometheus scrape over HTTPS)
+Prometheus 
+        ↓
+Grafana
+```
 
 ---
 
@@ -25,12 +38,37 @@ But Prometheus integration provides:
 
 ---
 
+## Security & Secrets Handling
+
+For security reasons, API keys are not hardcoded in prometheus.yml.
+Prometheus uses:
+```
+bearer_token_file: /etc/prometheus/secrets/yc_api_key
+```
+Create a file locally:
+```bash
+echo "<your_api_key>" > yc_api_key
+```
+Run container with mounted secret:
+```bash
+docker run \
+  -p 9090:9090 \
+  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+  -v $(pwd)/yc_api_key:/etc/prometheus/secrets/yc_api_key \
+  prom/prometheus
+```
+This approach:
+- Avoids credential leakage
+- Aligns with container security best practices
+- Can be easily replaced with Docker/Kubernetes Secrets
+
+---
+
 ## Prometheus Configuration
 
 See `prometheus.yml` in this directory.
 Replace:
 - <folder_id>
-- <api_key>
 
 ---
 
@@ -96,4 +134,16 @@ http://<vm_ip>:9090
 - Visualized in Grafana
 - Ready for alerting via PromQL
 
-This demonstrates production-grade observability architecture.
+---
+
+## Production Considerations
+- Use TLS between Prometheus and external endpoints
+- Restrict inbound access to port 9090
+- Use dedicated service account with minimal privileges
+- Rotate API keys
+
+---
+
+This setup demonstrates integration of managed cloud monitoring 
+with a self-hosted Prometheus stack, enabling portable and 
+vendor-neutral observability architecture.
