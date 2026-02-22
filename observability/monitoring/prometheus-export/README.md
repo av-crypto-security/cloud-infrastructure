@@ -40,7 +40,7 @@ But Prometheus integration provides:
 
 ## Security & Secrets Handling
 
-For security reasons, API keys are not hardcoded in prometheus.yml.
+For security reasons, API keys are not hardcoded in `prometheus.yml`.
 Prometheus uses:
 ```
 bearer_token_file: /etc/prometheus/secrets/yc_api_key
