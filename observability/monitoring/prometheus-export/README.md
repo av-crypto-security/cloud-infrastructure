@@ -47,7 +47,7 @@ ADD prometheus.yml /etc/prometheus/
 ```
 Build image:
 ```bash
-docker build -t my-prometheus .
+docker build -t my-prometheus
 ```
 Run container:
 ```bash
