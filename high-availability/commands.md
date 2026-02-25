@@ -20,7 +20,7 @@ healthcheck-healthythreshold=2,\
 healthcheck-http-port=80
 ```
 
-## Monitor System State
+## Monitor Instance and Target Health
 ```bash
 while true; do
   yc compute instance-group \
