@@ -1,0 +1,70 @@
+name: my-group
+service_account_id: <SA_ID>
+
+instance_template:
+  platform_id: standard-v2
+
+  resources_spec:
+    memory: 2g
+    cores: 2
+
+  boot_disk_spec:
+    mode: READ_WRITE
+    disk_spec:
+      image_id: fd8l45jhe4nvt0ih7h2e
+      type_id: network-hdd
+      size: 32g
+
+  network_interface_specs:
+    - network_id: <NETWORK_ID>
+      subnet_ids:
+        - <SUBNET_1_ID>
+        - <SUBNET_2_ID>
+        - <SUBNET_3_ID>
+      primary_v4_address_spec:
+        one_to_one_nat_spec:
+          ip_version: IPV4
+
+  scheduling_policy:
+    preemptible: false
+
+  metadata:
+    user-data: |-
+      #cloud-config
+      users:
+        - name: my-user
+          groups: sudo
+          lock_passwd: true
+          sudo: 'ALL=(ALL) NOPASSWD:ALL'
+          ssh-authorized-keys:
+            - <SSH_PUBLIC_KEY>
+
+      package_update: true
+
+      runcmd:
+        - [ apt-get, update ]
+        - [ apt-get, install, -y, nginx ]
+        - >
+          bash -c '
+          . /etc/os-release;
+          sed -i "s/Welcome to nginx/It is $(hostname) on $PRETTY_NAME/"
+          /var/www/html/index.nginx-debian.html
+          '
+
+deploy_policy:
+  max_unavailable: 1
+  max_expansion: 0
+
+scale_policy:
+  fixed_scale:
+    size: 3
+
+allocation_policy:
+  zones:
+    - zone_id: ru-central1-a
+    - zone_id: ru-central1-b
+    - zone_id: ru-central1-d
+
+load_balancer_spec:
+  target_group_spec:
+    name: my-target-group
