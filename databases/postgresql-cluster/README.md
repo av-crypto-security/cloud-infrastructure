@@ -145,6 +145,54 @@ Backups protect from:
 - Monitor replication delay
 - Define maintenance windows outside peak hours
 
+### Avoid Public Master Exposure
+
+Do not expose primary node to internet.
+Reasons:
+
+* Attack surface
+* Brute force risk
+* Direct DDL/DML risks
+
+Recommended:
+* Private network access
+* Bastion host
+* VPN
+
+### Use Connection Pooling (PgBouncer)
+
+Reduces:
+* Connection storm during traffic spikes
+* Memory pressure
+* Authentication overhead
+
+Critical in:
+* Kubernetes
+* Microservices
+
+### Separate Read and Write Workloads
+
+Prevents:
+* Write starvation
+* Lock contention
+* Resource saturation
+
+Enables:
+* Scaling read replicas independently
+
+### Monitor Replication Delay
+
+Use:
+```
+SELECT now() - pg_last_xact_replay_timestamp();
+```
+Replication lag impacts:
+* Consistency guarantees
+* Reporting systems
+* User-facing freshness
+
+Alert if lag exceeds SLA threshold.
+
 ---
 
 ## 11. Result
