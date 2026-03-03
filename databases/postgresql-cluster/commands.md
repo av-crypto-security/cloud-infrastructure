@@ -2,7 +2,7 @@
 
 ---
 
-## 0. Terraform Deployment
+## Terraform Deployment
 ```bash
 cd terraform/
 
@@ -11,20 +11,20 @@ terraform validate
 terraform plan
 terraform apply
 ```
-## Show created resources
+Show created resources
 ```bash
 terraform state list
 ```
 ---
 
-## 1. Install PostgreSQL Client
+## Install PostgreSQL Client
 ```bash
 sudo apt update
 sudo apt install -y postgresql-client
 ```
 ---
 
-## 2. Download Root CA Certificate
+## Download Root CA Certificate
 ```bash
 mkdir -p ~/.postgresql
 
@@ -35,7 +35,7 @@ chmod 0600 ~/.postgresql/root.crt
 ```
 ---
 
-## 3. Connect to Cluster (SSL Public Access)
+## Connect to Cluster (SSL Public Access)
 ```bash
 psql "host=<cluster-fqdn> \
       port=6432 \
@@ -46,12 +46,12 @@ psql "host=<cluster-fqdn> \
 ```
 ---
 
-## 4. Deploy Schema
+## Deploy Schema
 ```bash
-psql -h <cluster-fqdn>.mdb.yandexcloud.net \
-     -U appuser \
+psql -h <cluster-fqdn> \
+     -U <db-user> \
      -p 6432
-     -d appdb \
+     -d <database-name> \
      < /<path-to>/schema.sql \
      sslmode=verify-full
 ```
@@ -59,7 +59,7 @@ psql -h <cluster-fqdn>.mdb.yandexcloud.net \
 
 ---
 
-## 4. Create Table (Example)
+## Create Table (Example)
 ```sql
 CREATE TABLE orders (
     order_id BIGSERIAL PRIMARY KEY,
@@ -71,7 +71,7 @@ CREATE TABLE orders (
 ```
 ---
 
-## 5. Import CSV Sample Data
+## Import CSV Sample Data
 ```sql
 \copy orders(order_id,customer_id,status,status,total_amount,created_at) \
 FROM '/path/orders.csv' \
@@ -80,16 +80,17 @@ CSV HEADER;
 ```
 ---
 
-## 6. Check Replication Role
+## Check Replication Role
 ```sql
 SELECT pg_is_in_recovery();
-
+```
+```
 -- false = primary
 -- true  = replica
 ```
 ---
 
-## 7. Check Replication Status (Primary)
+## Check Replication Status (Primary)
 ```sql
 SELECT * FROM pg_stat_replication;
 ```
