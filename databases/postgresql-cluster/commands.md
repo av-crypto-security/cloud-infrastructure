@@ -2,6 +2,21 @@
 
 ---
 
+## 0. Terraform Deployment
+```bash
+cd terraform/
+
+terraform init
+terraform validate
+terraform plan
+terraform apply
+```
+## Show created resources
+```bash
+terraform state list
+```
+---
+
 ## 1. Install PostgreSQL Client
 ```bash
 sudo apt update
@@ -20,7 +35,7 @@ chmod 0600 ~/.postgresql/root.crt
 ```
 ---
 
-## 3. Connect via SSL (Public Access)
+## 3. Connect to Cluster (SSL Public Access)
 ```bash
 psql "host=<cluster-fqdn> \
       port=6432 \
@@ -29,6 +44,19 @@ psql "host=<cluster-fqdn> \
       user=<db-user> \
       target_session_attrs=read-write"
 ```
+---
+
+## 4. Deploy Schema
+```bash
+psql -h <cluster-fqdn>.mdb.yandexcloud.net \
+     -U appuser \
+     -p 6432
+     -d appdb \
+     < /<path-to>/schema.sql \
+     sslmode=verify-full
+```
+`schema.sql` example:
+
 ---
 
 ## 4. Create Table (Example)
@@ -43,7 +71,7 @@ CREATE TABLE orders (
 ```
 ---
 
-## 5. Import CSV Data
+## 5. Import CSV Sample Data
 ```sql
 \copy orders(order_id,customer_id,status,status,total_amount,created_at) \
 FROM '/path/orders.csv' \
