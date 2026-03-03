@@ -73,9 +73,9 @@ CREATE TABLE orders (
 
 ## Import CSV Sample Data
 ```sql
-\copy orders(order_id,customer_id,status,status,total_amount,created_at) \
-FROM '/path/orders.csv' \
-DELIMITER ',' \
+\copy app.employee(full_name, position, qualification)
+FROM 'employees.csv'
+DELIMITER ','
 CSV HEADER;
 ```
 ---
@@ -102,9 +102,9 @@ CREATE USER app_user WITH PASSWORD 'secure_password';
 
 GRANT CONNECT ON DATABASE app_db TO app_user;
 
-GRANT USAGE ON SCHEMA public TO app_user;
+GRANT USAGE ON SCHEMA app TO app_user;
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO app_user;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app TO app_user;
 ```
 ---
 
