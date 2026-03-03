@@ -48,12 +48,12 @@ psql "host=<cluster-fqdn> \
 
 ## Deploy Schema
 ```bash
-psql -h <cluster-fqdn> \
-     -U <db-user> \
-     -p 6432
-     -d <database-name> \
-     < /<path-to>/schema.sql \
-     sslmode=verify-full
+psql "host=<cluster-fqdn> \
+      port=6432 \
+      dbname=<database-name> \
+      user=<db-user> \
+      sslmode=verify-full" \
+      < schema.sql
 ```
 [`schema.sql`](schema.sql) — Database schema example
 
