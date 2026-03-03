@@ -59,13 +59,28 @@ psql "host=<cluster-fqdn> \
 
 ---
 
-## Create Table (Example)
+## Example DDL (Abstract Example)
+This is a generic example of a DDL statement and is not part of the deployed schema.
+
 ```sql
 CREATE TABLE orders (
     order_id BIGSERIAL PRIMARY KEY,
     customer_id BIGINT NOT NULL REFERENCES customers(customer_id),
     status TEXT NOT NULL CHECK (status IN ('NEW','PAID','SHIPPED','CANCELLED')),
     total_amount NUMERIC(12,2) NOT NULL CHECK (total_amount >= 0),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+```
+---
+
+## Example DDL (From Project Schema)
+
+```sql
+CREATE TABLE app.employee (
+    employee_id BIGSERIAL PRIMARY KEY,
+    full_name TEXT NOT NULL,
+    position TEXT NOT NULL,
+    qualification TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 ```
