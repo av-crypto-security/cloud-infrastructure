@@ -3,7 +3,7 @@
 ---
 
 ## 1. Install PostgreSQL Client
-``bash
+```bash
 sudo apt update
 sudo apt install -y postgresql-client
 ```
