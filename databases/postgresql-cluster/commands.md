@@ -55,7 +55,7 @@ psql -h <cluster-fqdn>.mdb.yandexcloud.net \
      < /<path-to>/schema.sql \
      sslmode=verify-full
 ```
-`schema.sql` example:
+[`schema.sql`](schema.sql) — Database schema example
 
 ---
 
