@@ -33,20 +33,20 @@ psql "host=<cluster-fqdn> \
 
 ## 4. Create Table (Example)
 
-CREATE TABLE dtm (
-    id SERIAL PRIMARY KEY,
-    depot INT NOT NULL,
-    store INT NOT NULL,
-    time INT NOT NULL,
-    distance INT NOT NULL
+CREATE TABLE orders (
+    order_id BIGSERIAL PRIMARY KEY,
+    customer_id BIGINT NOT NULL REFERENCES customers(customer_id),
+    status TEXT NOT NULL CHECK (status IN ('NEW','PAID','SHIPPED','CANCELLED')),
+    total_amount NUMERIC(12,2) NOT NULL CHECK (total_amount >= 0),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 ---
 
 ## 5. Import CSV Data
 
-\copy dtm(depot, store, time, distance) \
-FROM '/path/DTM.csv' \
+\copy orders(order_id,customer_id,status,status,total_amount,created_at) \
+FROM '/path/orders.csv' \
 DELIMITER ',' \
 CSV HEADER;
 
