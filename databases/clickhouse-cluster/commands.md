@@ -152,3 +152,51 @@ FROM metrics
 GROUP BY service
 ORDER BY avg_latency DESC;
 ```
+
+## Querying external data from S3
+
+ClickHouse can query external datasets directly from object storage without loading them into tables.
+
+Services with highest latency spike (S3)
+```SQL
+SELECT
+    timestamp,
+    service,
+    region,
+    request_latency_ms
+FROM s3(
+    'https://storage.yandexcloud.net/<your-bucket>/example-metrics.tsv',
+    'TSVWithNames',
+    'timestamp DateTime, service String, region String, cpu_usage Float32, memory_usage Float32, request_latency_ms UInt32, error_rate Float32'
+)
+ORDER BY request_latency_ms DESC
+LIMIT 10;
+```
+
+Average CPU usage by region (S3)
+```SQL
+SELECT
+    region,
+    avg(cpu_usage) AS avg_cpu
+FROM s3(
+    'https://storage.yandexcloud.net/<your-bucket>/example-metrics.tsv',
+    'TSVWithNames',
+    'timestamp DateTime, service String, region String, cpu_usage Float32, memory_usage Float32, request_latency_ms UInt32, error_rate Float32'
+)
+GROUP BY region
+ORDER BY avg_cpu DESC;
+```
+
+Request latency trend over time (S3)
+```SQL
+SELECT
+    toStartOfFiveMinute(timestamp) AS time_bucket,
+    avg(request_latency_ms) AS avg_latency
+FROM s3(
+    'https://storage.yandexcloud.net/<your-bucket>/example-metrics.tsv',
+    'TSVWithNames',
+    'timestamp DateTime, service String, region String, cpu_usage Float32, memory_usage Float32, request_latency_ms UInt32, error_rate Float32'
+)
+GROUP BY time_bucket
+ORDER BY time_bucket;
+```
