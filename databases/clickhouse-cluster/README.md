@@ -11,7 +11,7 @@ The repository shows how infrastructure metrics can be:
 ## Architecture Overview
 
 The project demonstrates a typical analytical workflow used in data platforms.
-
+```
 Telemetry dataset
         │
         ▼
@@ -22,9 +22,9 @@ ClickHouse query (table function)
         │
         ▼
 Analytical queries
-
+```
 For production systems the workflow typically evolves into:
-
+```
 Telemetry pipeline
         │
         ▼
@@ -38,7 +38,7 @@ MergeTree tables
         │
         ▼
 Analytical queries
-
+```
 ## Repository Structure
 
 cluster-architecture-and-connection.md  
