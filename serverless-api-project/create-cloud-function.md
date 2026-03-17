@@ -17,7 +17,7 @@ are exported locally to simplify subsequent commands.
 
 ## Function Creation
 
-A serverless function named `my-function` is created.
+A serverless function named `cloud-function` is created.
 
 The function runtime environment is Python and the entrypoint
 is defined in the source file.
