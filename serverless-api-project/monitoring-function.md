@@ -30,11 +30,11 @@ A managed PostgreSQL cluster is deployed with:
 The database contains a simple table used to store monitoring data.
 
 Example schema:
-```
-measurements(
-result INTEGER,
-time FLOAT
-)
+```sql
+CREATE TABLE measurements (
+    result INTEGER,
+    time FLOAT
+);
 ```
 
 ## Database Connection
@@ -43,7 +43,7 @@ The function connects to PostgreSQL using a managed connection
 provided by the serverless platform.
 
 Authentication is performed using a temporary access token
-provided by the function execution context.
+provided by the function execution context (`password=context.token["access_token"]`).
 
 This approach avoids storing database passwords inside
 the function code.
