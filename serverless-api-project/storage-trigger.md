@@ -23,7 +23,7 @@ systems, and log processing architectures.
 ## Object Storage Integration
 
 The first function uses the S3-compatible API to upload files
-to Object Storage. Authentication is performed using access keys
+to Object Storage. Authentication is performed using S3-compatible access keys
 associated with a service account.
 
 The function creates a temporary file, uploads it to the bucket,
