@@ -49,13 +49,13 @@ yc serverless trigger create object-storage \
   --name my-first-trigger \
   --bucket-id <BUCKET_NAME> \
   --events create-object \
-  --invoke-function-name my-trigger-function \
+  --invoke-function-name storage-trigger-function \
   --invoke-function-service-account-id $SERVICE_ACCOUNT_ID
 ```
 ## Create PostgreSQL cluster
 ```bash
 yc managed-postgresql cluster create \
-  --name my-pg-database \
+  --name monitoring-postgres \
   --postgresql-version 15 \
   --network-name default \
   --disk-type network-hdd \
@@ -78,6 +78,6 @@ yc serverless api-gateway create \
 ## Update API Gateway
 ```bash
 yc serverless api-gateway update \
-  --name hello-world \
-  --spec hello-world.yaml
+  --name monitoring-api \
+  --spec api-gateway.yaml
 ```
