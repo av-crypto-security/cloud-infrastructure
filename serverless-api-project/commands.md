@@ -9,11 +9,22 @@ sudo apt install jq
 ```
 ## Create service account
 ```bash
-yc iam service-account create \
-  --name service-account-for-cf
+export SERVICE_ACCOUNT=$(yc iam service-account create \
+  --name service-account-for-cf \
+  --description "service account for cloud functions" \
+  --format json | jq -r .)
+
+yc iam service-account list
+echo $SERVICE_ACCOUNT
+
+echo "export SERVICE_ACCOUNT_ID=<SA_ID>" >> ~/.bashrc && . ~/.bashrc
+echo $SERVICE_ACCOUNT_ID
 ```
 ## Assign role
 ```bash
+echo "export FOLDER_ID=$(yc config get folder-id)" >> ~/.bashrc && . ~/.bashrc 
+echo $FOLDER_ID
+
 yc resource-manager folder add-access-binding $FOLDER_ID \
   --subject serviceAccount:$SERVICE_ACCOUNT_ID \
   --role editor
@@ -36,6 +47,8 @@ yc serverless function version create \
 ```
 ## Invoke function
 ```bash
+yc serverless function list
+yc serverless function version list --function-name cloud-function
 yc serverless function invoke <FUNCTION_ID>
 ```
 ## Allow public invocation
