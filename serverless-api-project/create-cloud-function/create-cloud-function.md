@@ -19,8 +19,8 @@ are exported locally to simplify subsequent commands.
 
 A serverless function named `cloud-function` is created.
 
-The function runtime environment is Python and the entrypoint
-is defined in the source file.
+The function runtime environment is Python 3.7 (as defined in the deployment configuration).
+Entrypoint is defined in the source file.
 
 The function is deployed by uploading the source code and creating
 a new version.
