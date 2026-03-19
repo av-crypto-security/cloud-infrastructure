@@ -9,16 +9,12 @@ sudo apt install jq
 ```
 ## Create service account
 ```bash
-export SERVICE_ACCOUNT=$(yc iam service-account create \
+export SERVICE_ACCOUNT_ID=$(yc iam service-account create \
   --name serverless-sa \
   --description "service account for cloud functions" \
-  --format json | jq -r .)
+  --format json | jq -r .id)
 
 yc iam service-account list
-echo $SERVICE_ACCOUNT
-
-echo "export SERVICE_ACCOUNT_ID=<SA_ID>" >> ~/.bashrc && . ~/.bashrc
-echo $SERVICE_ACCOUNT_ID
 ```
 ## Assign role
 ```bash
@@ -35,12 +31,13 @@ yc serverless function create \
   --name cloud-function
 ```
 ## Deploy function version
+Ensure that the source file `index.py` exists in the working directory before deployment.
 ```bash
 yc serverless function version create \
   --function-name cloud-function \
   --memory 256m \
   --execution-timeout 5s \
-  --runtime python37 \
+  --runtime python311 \
   --entrypoint index.handler \
   --service-account-id $SERVICE_ACCOUNT_ID \
   --source-path index.py
