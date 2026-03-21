@@ -50,9 +50,7 @@ yc serverless function version create \
 ```bash
 yc serverless function list
 yc serverless function version list --function-name cloud-function
-
 yc serverless function invoke <FUNCTION_ID>
-
 yc serverless function get cloud-function
 ```
 ## Trigger Function Deployment
