@@ -80,8 +80,10 @@ Create task:
   "action": "analyze",
   "file_url": "https://example.com/file.txt"
 }
+```
 
 Check status:
+
 ```json
 {
   "action": "status",
