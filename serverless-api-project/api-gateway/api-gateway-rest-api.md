@@ -1,54 +1,80 @@
-# REST API using API Gateway and Serverless Functions
+# REST API for Monitoring Data (API Gateway + Serverless)
 
-This document describes how to expose a serverless function
-through an HTTP REST API using API Gateway.
+This module exposes monitoring data through an HTTP API
+using API Gateway and a serverless function.
 
-The API retrieves monitoring results from PostgreSQL
-and returns them to clients.
+## Overview
 
-## API Gateway
+The API provides access to monitoring results stored in PostgreSQL.
 
-API Gateway acts as an HTTP frontend for serverless functions.
+Components:
 
-The gateway configuration is defined using an OpenAPI specification.
+- API Gateway (`api-gateway`)  
+  HTTP entry point for external clients
 
-Example endpoint:
+- API Function (`api-function`)  
+  Handles requests and queries the database
 
-/results
+- PostgreSQL (`monitoring-db`)  
+  Stores monitoring results
 
-The endpoint forwards incoming HTTP requests directly
-to the serverless function.
+## Architecture
 
-## Request Authorization
+1. Client sends HTTP request
+2. API Gateway forwards request to function
+3. Function queries PostgreSQL
+4. Response is returned as JSON
 
-The API uses a simple query parameter called `secret`
-to restrict access.
+## Endpoint
 
-Requests without the correct parameter return an
-HTTP 401 response.
+GET /results
+Returns up to 50 latest monitoring records.
 
-This mechanism is intended only for demonstration
-purposes. In production systems authentication would
-typically use:
+## Query Parameters
+
+- `token` — simple access control parameter
+
+## Security
+
+A simple token-based check is used:
+
+- request must include `?token=<API_TOKEN>`
+- otherwise returns HTTP 401
+
+This mechanism is used for demonstration purposes only.
+
+In production systems, proper authentication should be used:
 
 - IAM
-- JWT tokens
-- OAuth
+- OAuth2
+- JWT
 
 ## Database Query
 
-The function retrieves up to 50 monitoring records
-from the PostgreSQL database.
+The function executes:
 
-The query executed by the function:
 ```sql
-SELECT * FROM measurements LIMIT 50
+SELECT result, response_time
+FROM measurements
+ORDER BY time DESC
+LIMIT 50;
 ```
-Results are returned in JSON format.
 
-## API Workflow
+## Response Format
 
-1. client sends HTTP request to API Gateway
-2. gateway invokes the serverless function
-3. function queries PostgreSQL
-4. results are returned to the client
+```json
+{
+  "results": [
+    {
+      "status": 200,
+      "response_time": 0.123
+    }
+  ]
+}
+```
+
+## Notes
+
+- Stateless API
+- No credentials stored in code
+- API Gateway decouples HTTP layer from compute
