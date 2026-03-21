@@ -1,74 +1,71 @@
 # CLI Commands
+Deployment steps for serverless monitoring with PostgreSQL.
 
-This document contains the CLI commands used to deploy
-the serverless architecture.
-
-## Additional role for the SA
+## Service Account Role
 ```bash
 yc resource-manager folder add-access-binding $FOLDER_ID \
   --role serverless.mdbProxies.user \
   --subject serviceAccount:$SERVICE_ACCOUNT_ID
 ```
-## Create PostgreSQL cluster
+
+## Create PostgreSQL Cluster
 ```bash
 yc vpc subnet list
 
 yc managed-postgresql cluster create \
-  --name pg-database \
-  --description 'For Serverless' \
+  --name monitoring-db \
+  --description 'Serverless monitoring database' \
   --postgresql-version 15 \
   --environment production \
   --network-name default \
   --resource-preset c3-c2-m4 \
-  --host zone-id=<HOST_ZONE_ID>,subnet-id=<SUBNET_ID> \
+  --host zone-id=<ZONE_ID>,subnet-id=<SUBNET_ID> \
   --disk-type network-hdd \
   --disk-size 10 \
-  --user name=<USER_NAME>,password=<STRONG_PASSWORD> \
-  --database name=<DB_NAME>,owner=<USER_NAME> \
+  --user name=<DB_USER>,password=<STRONG_PASSWORD> \
+  --database name=<DB_NAME>,owner=<DB_USER> \
   --websql-access \
   --serverless-access
-
-yc managed-postgresql cluster list
-yc managed-postgresql cluster get <NAME_OR_CLUSTER_ID>
 ```
-## Create table
+
+## Create Table
 ```sql
 CREATE TABLE measurements (
-    result integer,
-    time float
+    result INTEGER,
+    response_time FLOAT
 );
 ```
-## Create a function
-```bash
-echo "export CONNECTION_ID=<CONNECTION_ID>" >> ~/.bashrc && . ~/.bashrc
-echo "export DB_USER=<DB_USER>" >> ~/.bashrc && . ~/.bashrc
-echo "export DB_HOST=<DB_HOST>" >> ~/.bashrc && . ~/.bashrc
 
+## Deploy Monitoring Function
+```bash
 yc serverless function create \
-  --name  function-for-postgresql \
-  --description "function for postgresql"
+  --name monitoring-function \
+  --description "Website monitoring function"
 
 yc serverless function version create \
-  --function-name=function-for-postgresql \
-  --memory=256m \
-  --execution-timeout=5s \
-  --runtime=python37 \
-  --entrypoint=function-for-postgresql.entry \
+  --function-name monitoring-function \
+  --memory 256m \
+  --execution-timeout 10s \
+  --runtime python311 \
+  --entrypoint index.handler \
   --service-account-id $SERVICE_ACCOUNT_ID \
   --environment VERBOSE_LOG=True \
-  --environment CONNECTION_ID=$CONNECTION_ID \
-  --environment DB_USER=$DB_USER \
-  --environment DB_HOST=$DB_HOST \
-  --source-path function-for-postgresql.py
-
-yc serverless function version list --function-name function-for-postgresql
-yc serverless function invoke --name function-for-postgresql
+  --environment CONNECTION_ID=<CONNECTION_ID> \
+  --environment DB_USER=<DB_USER> \
+  --environment DB_HOST=<DB_HOST> \
+  --source-path monitoring-function.zip
 ```
-## Create a trigger-timer
+
+## Test Function
+```bash
+yc serverless function invoke --name monitoring-function
+```
+
+## Create Timer Trigger
 ```bash
 yc serverless trigger create timer \
-  --name trigger-for-postgresql \
-  --invoke-function-name function-for-postgresql \
+  --name monitoring-trigger \
+  --invoke-function-name monitoring-function \
   --invoke-function-service-account-id $SERVICE_ACCOUNT_ID \
   --cron-expression '* * * * ? *'
 ```
