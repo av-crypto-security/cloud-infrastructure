@@ -30,7 +30,7 @@ yc serverless function version create \
   --service-account-id $SERVICE_ACCOUNT_ID \
   --source-path cloud-function.zip
 ```
-Create version with environment variables
+### Create version with environment variables
 ```bash
 yc serverless function version list --function-name cloud-function
 
@@ -77,7 +77,7 @@ yc serverless trigger create object-storage \
   --invoke-function-name trigger-function \
   --invoke-function-service-account-id $SERVICE_ACCOUNT_ID
 ```
-Trigger Validation
+### Trigger Validation
 ```bash
 yc serverless function logs trigger-function
 ```
