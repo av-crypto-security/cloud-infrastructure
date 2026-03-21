@@ -80,3 +80,18 @@ Create task:
   "action": "analyze",
   "file_url": "https://example.com/file.txt"
 }
+
+Check status:
+```json
+{
+  "action": "status",
+  "task_id": "uuid"
+}
+```
+
+## Notes
+
+- Fully asynchronous architecture
+- Stateless compute layer
+- Queue ensures reliable processing
+- Suitable for security pipelines and batch workloads
