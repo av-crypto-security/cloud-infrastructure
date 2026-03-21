@@ -1,69 +1,67 @@
-# Website Monitoring with Serverless and PostgreSQL
+# Website Monitoring Pipeline (Serverless + PostgreSQL)
 
-This example demonstrates how serverless functions can be used
-for automated monitoring tasks with results stored in a database.
+This module implements a serverless monitoring system that measures
+website availability and stores results in a PostgreSQL database.
 
-The function periodically checks the availability of a website
-and records response metrics in PostgreSQL.
+## Overview
+
+The system consists of:
+
+- Monitoring Function (`monitoring-function`)  
+  Sends HTTP requests and measures response time.
+
+- Managed PostgreSQL (`monitoring-db`)  
+  Stores monitoring results.
+
+- Timer Trigger (`monitoring-trigger`)  
+  Executes the function periodically.
 
 ## Architecture
 
-Components involved:
+The system follows a scheduled execution model:
 
-Serverless Function  
-Performs HTTP request and measures response time.
+1. Timer trigger invokes the function
+2. Function sends HTTP request to target
+3. Response time is measured
+4. Result is written to PostgreSQL
 
-Managed PostgreSQL Database  
-Stores monitoring results.
+## Database
 
-Timer Trigger  
-Executes the function periodically.
-
-## PostgreSQL Cluster
-
-A managed PostgreSQL cluster is deployed with:
-
-- PostgreSQL version 15
-- minimal resource preset
-- serverless access enabled
-
-The database contains a simple table used to store monitoring data.
+A managed PostgreSQL cluster is used with serverless access enabled.
 
 Example schema:
+
 ```sql
 CREATE TABLE measurements (
     result INTEGER,
-    time FLOAT
+    response_time FLOAT
 );
 ```
+## Secure Database Access
 
-## Database Connection
-
-The function connects to PostgreSQL using a managed connection
-provided by the serverless platform.
-
-Authentication is performed using a temporary access token
-provided by the function execution context (`password=context.token["access_token"]`).
-
-This approach avoids storing database passwords inside
-the function code.
+Authentication is performed using a temporary IAM token:
+```
+password=context.token["access_token"]
+```
+This eliminates the need to store static credentials.
 
 ## Monitoring Logic
 
-The function performs an HTTP request to a target website
-and measures the response time.
-
-Possible outcomes include:
-
-- HTTP response code
+The function performs an HTTP request with timeouts:
 - connection timeout
 - read timeout
 
-The result and response time are inserted into the database.
+Failure cases are mapped to custom status codes.
 
-## Timer Trigger
+## Scheduling
 
-A timer trigger runs the function periodically using
-a cron expression.
+The function is triggered using a cron expression:
+```bash
+* * * * ? *
+```
+This results in execution once per minute.
 
-This allows continuous monitoring without manual execution.
+## Notes
+Stateless execution
+No hardcoded credentials
+Suitable for uptime monitoring and SLA tracking
