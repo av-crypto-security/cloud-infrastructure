@@ -1,87 +1,149 @@
-# Cloud Cost Estimation (Yandex Cloud)
+# Cloud Cost Estimation
 
-This module demonstrates cost estimation for a typical cloud architecture
-using both the official calculator and manual calculations.
-This model focuses on relative cost estimation rather than exact pricing.
+This module demonstrates a structured approach to estimating cloud infrastructure cost.
+
+The goal is not to reproduce calculator output, but to model cost behavior
+under different load scenarios and understand key cost drivers.
+
+---
 
 ## Overview
 
-Before deploying any system, it is critical to estimate infrastructure cost.
+Any production system must be evaluated in terms of cost before deployment.
 
-This example evaluates a system consisting of:
+This module models a simple architecture:
 
-- Compute Cloud (VM)
-- Managed PostgreSQL cluster
-- Technical support plan
+* Virtual Machine (Compute)
+* Managed Database
+* Monitoring
 
-## Architecture Cost Model
+We focus on **cost behavior**, not exact pricing.
 
-### Compute Cloud
+---
 
-Configuration:
+## Architecture Model
 
-- OS: Ubuntu 22.04
-- Platform: Intel Ice Lake
-- 4 vCPU (100% guaranteed)
-- 16 GB RAM
-- 100 GB SSD
-- Public IP
-- 100 GB outbound traffic
+### Compute Layer
 
-### Managed PostgreSQL
+* General-purpose VM
+* Variable CPU/RAM configurations
+* Always-on workload (24/7)
 
-- 2 hosts
-- class: s3-c4-m16
-- storage: 200 GB (network-ssd)
-- no public IP
+### Database Layer
 
-### Support Plan
+* Managed PostgreSQL (2 nodes)
+* Fixed baseline cost (cluster-based pricing)
 
-- Standard plan
-- estimated consumption: 35,000 RUB/month
+### Monitoring
 
-## Cost Estimation Approach
+* Pay-per-ingestion model
+* Cost depends on metric volume
 
-The cost is calculated using:
+---
 
-1. Yandex Cloud Pricing Calculator
-2. Manual calculation (for unsupported services)
+## Monitoring Cost Model
 
-## Manual Calculation Example (Monitoring)
-
-Given:
-
-- 35 metrics
-- 2 values per minute
-- 30 days
-- Cost per 1M values = 9.8 units
+### Formula
 
 Total values:
 
 ```
-35 × 2 × (60 × 24 × 30) = 3,024,000 values
+metrics × values_per_minute × minutes_per_month
+```
+
+Where:
+
+```
+minutes_per_month = 60 × 24 × 30
 ```
 
 Cost:
 
 ```
-3.024 × 9.80 = 29.64 cost units
+(total_values / 1_000_000) × price_per_million
 ```
+
+---
+
+## Scenario Analysis
+
+### Scenario A — Low Load
+
+* 10 metrics
+* 1 value/min
+
+### Scenario B — Baseline
+
+* 35 metrics
+* 2 values/min
+
+### Scenario C — High Load
+
+* 100 metrics
+* 5 values/min
+
+---
+
+## Sensitivity Analysis
+
+Monitoring cost grows linearly with:
+
+* number of metrics
+* sampling frequency
+
+Implications:
+
+* doubling metrics → doubles cost
+* doubling frequency → doubles cost
+
+This makes monitoring cost predictable and easy to control.
+
+---
+
+## Compute Cost Behavior
+
+Compute cost is different:
+
+* depends on resource allocation (CPU, RAM)
+* charged per hour
+* not directly tied to actual utilization
+
+Key property:
+
+> Overprovisioned resources generate constant cost even when idle
+
+---
+
+## Database Cost Behavior
+
+Managed databases:
+
+* have baseline cost (cluster nodes)
+* scale in discrete steps
+* not linear like monitoring
+
+---
 
 ## Key Observations
 
-- Monitoring cost is negligible compared to compute/database
-- Compute and DB are dominant cost drivers
-- Public IP and traffic contribute additional cost
+* Monitoring → linear and predictable
+* Compute → continuous but usage-insensitive
+* Database → step-based pricing
+
+---
 
 ## Engineering Takeaways
 
-- Always estimate cost before deployment
-- Identify high-cost components early
-- Use labels and monitoring for cost attribution
-- Prefer autoscaling and serverless where possible
+* Always model multiple load scenarios
+* Avoid single-point estimates
+* Identify dominant cost drivers early
+* Monitoring is rarely the main cost factor
+* Compute and DB require the most optimization effort
+
+---
 
 ## Notes
 
-- Prices may vary depending on region and updates
-- Always validate using the official calculator
+* This model is intentionally simplified
+* Real pricing depends on region and provider
+* Always validate using official pricing tools
