@@ -2,6 +2,7 @@
 
 This module demonstrates cost estimation for a typical cloud architecture
 using both the official calculator and manual calculations.
+This model focuses on relative cost estimation rather than exact pricing.
 
 ## Overview
 
