@@ -52,6 +52,14 @@ aws sqs create-queue \
   --endpoint https://message-queue.api.cloud.yandex.net/
 ```
 
+### Get ARN
+```bash
+aws sqs get-queue-attributes \
+  --endpoint https://message-queue.api.cloud.yandex.net \
+  --queue-url $YMQ_QUEUE_URL \
+  --attribute-names QueueArn
+```
+
 ## YDB
 
 ```bash
