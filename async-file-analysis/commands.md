@@ -64,6 +64,11 @@ aws sqs get-queue-attributes \
 
 ```bash
 yc ydb database create analysis-db --serverless
+
+aws dynamodb create-table \
+  --cli-input-json file://tasks.json \
+  --endpoint-url $DOCAPI_ENDPOINT \
+  --region ru-central1
 ```
 
 ## Functions
