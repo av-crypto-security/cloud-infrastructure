@@ -1,99 +1,134 @@
-# Async File Analysis Pipeline (Serverless + Queue + Object Storage)
+# Async File Analysis Module
 
-This module implements an asynchronous file processing pipeline
-based on message queues and serverless functions.
+This module implements the core asynchronous processing pipeline
+used in the project.
 
-The system demonstrates how to decouple heavy processing workloads
-from user-facing APIs using an event-driven architecture.
+It focuses on decoupling request handling from heavy file analysis
+using a queue-based event-driven architecture.
 
-## Overview
+---
 
-The pipeline simulates a security-oriented file analysis workflow.
+## Purpose
 
-Instead of processing files synchronously, tasks are pushed
-to a queue and processed asynchronously.
+The module simulates a backend component of a security system,
+such as a malware scanning or file inspection service.
 
-Components:
+It is designed to demonstrate how to:
 
-- API Function (`analysis-api`)  
-  Accepts file URLs and creates analysis tasks
+- process files asynchronously
+- scale workloads horizontally
+- isolate compute-heavy operations
 
-- Message Queue (`analysis-queue`)  
-  Buffers tasks and ensures reliable delivery
+---
 
-- Worker Function (`analysis-worker`)  
-  Processes files asynchronously
+## Architecture Role
 
-- Object Storage (`analysis-storage`)  
-  Stores uploaded files and generated results
+This module is responsible for:
 
-- YDB (`analysis-db`)  
-  Stores task state and results
+- task creation (API layer)
+- task delivery (message queue)
+- task execution (worker)
+- result persistence (database)
 
-- Lockbox  
-  Stores access credentials securely
+---
 
-## Architecture
+## Processing Flow
 
-1. Client sends request with file URL
-2. API function creates a task in DB
-3. Task is pushed to message queue
-4. Worker function is triggered
-5. File is downloaded and analyzed
-6. Result is stored in DB and Object Storage
-7. Client polls task status
+1. API function receives a request to analyze a file
+2. A unique task_id is generated
+3. Task metadata is stored in YDB
+4. A message is sent to YMQ containing:
+   - task_id
+   - object_name (file in Object Storage)
+5. Worker function is triggered by the queue
+6. Worker:
+   - retrieves file from Object Storage
+   - performs analysis
+   - stores result in YDB
 
-## Why Queue-Based Design
+---
 
-This architecture solves key problems:
+## File Handling Model
 
-- avoids long-lived HTTP connections
-- isolates heavy processing from API layer
-- improves fault tolerance
-- enables horizontal scaling
+Unlike synchronous systems, this pipeline does NOT:
 
-## Security Context
+- accept direct file uploads in API
+- download files from external URLs
 
-The pipeline simulates:
+Instead:
 
-- file validation
-- content inspection
-- controlled file processing
+- files are pre-stored in Object Storage
+- workers operate only on internal storage objects
 
-Secrets are never hardcoded and are retrieved
-via Lockbox at runtime.
+This approach improves:
+
+- security (no external fetch)
+- reliability
+- reproducibility
+
+---
 
 ## Task Model
 
 Each task contains:
 
 - task_id (UUID)
-- status (pending / done)
-- result (analysis output)
+- ready (boolean)
+- result (JSON string)
 
-## Example Flow
+---
 
-Create task:
+## Analysis Model (Mock)
 
-```json
-{
-  "action": "analyze",
-  "file_url": "https://example.com/file.txt"
-}
-```
+The system simulates analysis by:
 
-Check status:
+- computing SHA-256 hash
+- deriving a pseudo verdict (clean / malicious)
+- returning file metadata
 
-```json
-{
-  "action": "status",
-  "task_id": "uuid"
-}
-```
+This allows testing:
 
-## Notes
+- queue behavior
+- async execution
+- storage integration
 
-- Fully asynchronous architecture
-- Stateless compute layer
-- Queue ensures reliable processing
-- Suitable for security pipelines and batch workloads
+without external dependencies.
+
+---
+
+## Design Principles
+
+### 1. Asynchronous Processing
+All heavy operations are executed outside the API layer.
+
+### 2. Stateless Workers
+Workers do not store local state and rely on external systems.
+
+### 3. Loose Coupling
+Queue separates API and processing logic.
+
+### 4. Fault Isolation
+Failures in worker do not affect API availability.
+
+---
+
+## Why This Matters
+
+This module represents a common backend pattern used in:
+
+- antivirus systems
+- document processing pipelines
+- data ingestion systems
+- cloud security services
+
+---
+
+## Relation to Main README
+
+See `README.md` for:
+
+- full system architecture
+- API contract
+- deployment details
+
+This document focuses only on the internal processing logic.
