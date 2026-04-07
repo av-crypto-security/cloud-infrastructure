@@ -11,5 +11,5 @@
       "KeyType": "HASH"
     }
   ],
-  "TableName": "analysis_tasks"
+  "TableName": "tasks"
 }
