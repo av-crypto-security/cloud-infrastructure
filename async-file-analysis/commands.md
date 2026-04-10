@@ -49,7 +49,6 @@ yc lockbox secret create --name analysis-secret \
   --folder-id $FOLDER_ID \
   --description "keys for serverless" \
   --payload '[{"key": "ACCESS_KEY_ID", "text_value": "<ACCESS_KEY_ID>"}, {"key": "SECRET_ACCESS_KEY", "text_value": "<SECRET_ACCESS_KEY_VALUE>"}]'
-
 ```
 
 ## Message Queue
