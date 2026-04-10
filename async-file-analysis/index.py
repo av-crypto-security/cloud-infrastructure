@@ -139,9 +139,7 @@ def handle_api(event, context):
 
     return {"error": "unknown action"}
     
-# ---------------------------
 # ANALYSIS (WORKER)
-# ---------------------------
 
 def mock_analysis(data: bytes):
     time.sleep(2)                # heavy load imitation
