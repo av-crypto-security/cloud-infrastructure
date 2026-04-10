@@ -92,7 +92,7 @@ def get_storage_client():
 def create_task():
     task_id = str(uuid.uuid4())
 
-    object_name = "sample.bin"  # file saved in the Object Storage
+    object_name = "sample.bin"  # file saved in the Object Storage, better make presigned upload
 
     get_docapi_table().put_item(Item={
         'task_id': task_id,
