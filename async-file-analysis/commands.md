@@ -34,6 +34,10 @@ yc resource-manager folder add-access-binding $FOLDER_ID \
 yc resource-manager folder add-access-binding $FOLDER_ID \
   --subject serviceAccount:$SERVICE_ACCOUNT_ID \
   --role lockbox.payloadViewer
+
+yc resource-manager folder add-access-binding $FOLDER_ID \
+  --subject serviceAccount:$SERVICE_ACCOUNT_ID \
+  --role serverless.functions.invoker
 ```
 
 ## Lockbox Secret
@@ -83,7 +87,7 @@ yc serverless function create --name analysis-worker
 ```bash
 yc serverless function version create \
   --function-name analysis-api \
-  --runtime python37 \
+  --runtime python311 \
   --entrypoint index.handle_api \
   --service-account-id $SERVICE_ACCOUNT_ID \
   --package-bucket-name $S3_BUCKET \
