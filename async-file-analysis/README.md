@@ -26,9 +26,6 @@ Client → API (Cloud Function)
    * creates a task ID
    * stores metadata in YDB
    * sends a message to YMQ
-   * 
-Files are expected to be pre-uploaded to Object Storage.
-Current API does not handle file uploads.  
 
 3. Worker function:
 
@@ -85,6 +82,9 @@ You can generate one:
 ```
 python3 -c "import os; open('sample.bin','wb').write(os.urandom(1024))"
 ```
+
+Files are expected to be pre-uploaded to Object Storage.
+Current API does not handle file uploads.
 
 ---
 
