@@ -26,6 +26,10 @@ Client → API (Cloud Function)
    * creates a task ID
    * stores metadata in YDB
    * sends a message to YMQ
+   * 
+Files are expected to be pre-uploaded to Object Storage.
+Current API does not handle file uploads.  
+
 3. Worker function:
 
    * receives message from queue
