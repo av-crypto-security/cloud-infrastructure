@@ -80,6 +80,12 @@ Used for:
 
 * Storing binary files for analysis
 
+A test file (`sample.bin`) must exist in Object Storage.
+You can generate one:
+```
+python3 -c "import os; open('sample.bin','wb').write(os.urandom(1024))"
+```
+
 ---
 
 ### 4. Yandex Message Queue (YMQ)
