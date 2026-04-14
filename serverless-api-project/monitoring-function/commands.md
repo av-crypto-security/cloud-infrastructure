@@ -47,13 +47,13 @@ yc serverless function version create \
   --memory 256m \
   --execution-timeout 10s \
   --runtime python311 \
-  --entrypoint index.handler \
+  --entrypoint monitoring-function.handler \
   --service-account-id $SERVICE_ACCOUNT_ID \
   --environment VERBOSE_LOG=True \
   --environment CONNECTION_ID=<CONNECTION_ID> \
   --environment DB_USER=<DB_USER> \
   --environment DB_HOST=<DB_HOST> \
-  --source-path monitoring-function.zip
+  --source-path monitoring-function.py
 ```
 
 ## Test Function
