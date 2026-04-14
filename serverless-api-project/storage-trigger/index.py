@@ -14,7 +14,7 @@ TIME_ZONE = os.getenv("TIME_ZONE", "UTC")
 
 TEMP_FILE = "/tmp/file.txt"
 
-# Инициализация клиента один раз (оптимально для serverless)
+# Initialize the client once (optimal for serverless)
 s3_client = boto3.client(
     "s3",
     aws_access_key_id=ACCESS_KEY,
@@ -77,7 +77,7 @@ def handler(event, context):
         }
 
     except Exception as e:
-        logger.exception("Function failed")  # <-- важно!
+        logger.exception("Function failed")  # <-- quite important!
 
         return {
             "statusCode": 500,
