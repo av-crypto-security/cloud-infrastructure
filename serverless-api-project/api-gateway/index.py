@@ -33,7 +33,7 @@ def fetch_results(conn):
         cursor.execute("""
             SELECT result, response_time
             FROM measurements
-            ORDER BY time DESC
+            ORDER BY response_time DESC
             LIMIT 50
         """)
         rows = cursor.fetchall()
