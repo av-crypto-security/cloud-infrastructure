@@ -53,7 +53,7 @@ yc serverless function version create \
   --environment CONNECTION_ID=<CONNECTION_ID> \
   --environment DB_USER=<DB_USER> \
   --environment DB_HOST=<DB_HOST> \
-  --source-path monitoring-function.py
+  --source-path monitoring-function.zip
 ```
 
 ## Test Function
