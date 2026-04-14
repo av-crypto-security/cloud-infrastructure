@@ -28,9 +28,9 @@ yc serverless function version create \
   --runtime python311 \
   --entrypoint index.handler \
   --service-account-id $SERVICE_ACCOUNT_ID \
-  --environment CONNECTION_ID=<CONNECTION_ID> \
-  --environment DB_USER=<DB_USER> \
-  --environment DB_HOST=<DB_HOST> \
+  --environment CONNECTION_ID=$CONNECTION_ID \
+  --environment DB_USER=$DB_USER \
+  --environment DB_HOST=$DB_HOST \
   --environment API_TOKEN=<API_TOKEN> \
   --source-path api-function.zip
 ```
