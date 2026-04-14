@@ -62,9 +62,9 @@ yc serverless function version create \
   --memory 256m \
   --execution-timeout 10s \
   --runtime python311 \
-  --entrypoint index.handler \
+  --entrypoint index-for-trigger.handler \
   --service-account-id $SERVICE_ACCOUNT_ID \
-  --source-path index.py
+  --source-path index-for-trigger.py
 ```
 ## Create Object Storage Trigger
 ```bash
