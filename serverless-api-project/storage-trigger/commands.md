@@ -44,7 +44,7 @@ yc serverless function version create \
   --source-version-id <VERSION_ID> \
   --environment ACCESS_KEY=<ACCESS_KEY> \
   --environment SECRET_KEY=<SECRET_KEY> \
-  --environment BUCKET_NAME=bucket-for-trigger
+  --environment BUCKET_NAME=bucket-for-storage-trigger
 ```
 ## Function Invocation
 ```bash
@@ -70,7 +70,7 @@ yc serverless function version create \
 ```bash
 yc serverless trigger create object-storage \
   --name first-trigger \
-  --bucket-id bucket-for-trigger \
+  --bucket-id bucket-for-storage-trigger \
   --events 'create-object' \
   --invoke-function-name trigger-function \
   --invoke-function-service-account-id $SERVICE_ACCOUNT_ID
