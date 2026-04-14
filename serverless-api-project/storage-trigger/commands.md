@@ -64,7 +64,7 @@ yc serverless function version create \
   --runtime python311 \
   --entrypoint index.handler \
   --service-account-id $SERVICE_ACCOUNT_ID \
-  --source-path trigger-index.py
+  --source-path index.py
 ```
 ## Create Object Storage Trigger
 ```bash
