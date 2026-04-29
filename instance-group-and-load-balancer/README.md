@@ -1,4 +1,4 @@
-# Instance Group and Load Balancer (Yandex Cloud)
+# Instance Group and Load Balancer
 
 This lab demonstrates how to deploy a highly available web application
 using Yandex Cloud Instance Groups and a Network Load Balancer.
