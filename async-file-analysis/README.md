@@ -1,4 +1,4 @@
-# Async File Analysis Pipeline (Serverless, Yandex Cloud)
+# Async File Analysis Pipeline (Serverless)
 
 ## Overview
 
