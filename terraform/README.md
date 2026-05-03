@@ -1,4 +1,4 @@
-# Yandex Cloud Infrastructure (Terraform)
+# Cloud Infrastructure (Terraform)
 
 This repository contains Terraform configurations for deploying
 basic infrastructure in **Yandex Cloud**.
