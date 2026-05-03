@@ -113,8 +113,8 @@ yc managed-mysql cluster create \
   --resource-preset s2.micro \
   --disk-type network-ssd \
   --disk-size 20 \
-  --user name=user1,password="user1user1" \
-  --database name=db1 \
+  --user name=<username>,password="<userpassword>" \
+  --database name=<dbname> \
   --deletion-protection
 ```
 
