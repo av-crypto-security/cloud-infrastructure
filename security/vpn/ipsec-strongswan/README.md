@@ -18,6 +18,6 @@ Cloud VPC ↔ IPSec Gateway ↔ Internet ↔ IPSec Gateway ↔ On-prem Network
 - Network isolation behind VPN gateways
 
 ## Scope and limitations
-- This is a minimal functional lab
+- This is a minimal functional implementation
 - No BGP, no HA, no failover
 - Intended for learning and validation, not production use
