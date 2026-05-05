@@ -1,4 +1,4 @@
-# First Application Deployment — NGINX
+# Application Deployment — NGINX
 
 This document describes the exact sequence of steps required
 to deploy a first application (NGINX) into a Managed Kubernetes cluster.
