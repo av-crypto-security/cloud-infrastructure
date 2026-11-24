@@ -1,10 +1,14 @@
 # Cloud Infrastructure
 
-> ⚠️ This repository is actively evolving and continuously extended with new scenarios and improvements.
+> ⚠️ This repository is actively evolving and continuously extended
+with new scenarios and improvements.
 
-This repository contains a collection of **practical cloud engineering implementations** built on **Yandex Cloud**, covering real-world infrastructure, security, and platform design patterns.
+This repository contains a collection of **practical cloud engineering
+implementations** built on **Yandex Cloud**, covering real-world infrastructure,
+security, and platform design patterns.
 
-The focus is on **architecture, system design, and implementation decisions**, rather than step-by-step tutorials.
+The focus is on **architecture, system design, and implementation decisions**,
+rather than step-by-step tutorials.
 
 ---
 
@@ -20,7 +24,8 @@ The repository demonstrates hands-on experience with:
 * **Cloud security** — IAM, KMS, TLS, VPN, and network isolation
 * **Observability** — metrics, alerting, and monitoring pipelines
 
-All scenarios are designed as **independent but composable building blocks** of a modern cloud platform.
+All scenarios are designed as **independent but composable building blocks**
+of a modern cloud platform.
 
 ---
 
@@ -31,16 +36,25 @@ All scenarios are designed as **independent but composable building blocks** of 
 * **terraform/** — Modular Infrastructure as Code (VPC, VM, PostgreSQL)
 * **packer/** — Golden image build pipeline (Ubuntu + NGINX)
 
+### Configuration Management
+
+* **ansible-nginx-configuration-management/** — Ansible-based
+configuration management for multiple Ubuntu servers, including NGINX provisioning,
+Jinja2 templating, service management, idempotency checks, and recovery validation.
+
 ### Compute & Platform
 
 * **k8s/** — Managed Kubernetes (cluster design, RBAC, networking, autoscaling)
-* **instance-group-and-load-balancer/** — Declarative HA deployment via Instance Groups
+* **instance-group-and-load-balancer/** — Declarative HA deployment
+via Instance Groups
 * **high-availability/** — Failure handling across VM, zones, and application layers
 
 ### Serverless & Event-Driven Systems
 
-* **serverless-api-project/** — End-to-end serverless architecture (API Gateway + Functions + DB)
-* **async-file-analysis/** — Event-driven pipeline (Object Storage → Queue → Functions)
+* **serverless-api-project/** — End-to-end serverless architecture
+(API Gateway + Functions + DB)
+* **async-file-analysis/** — Event-driven pipeline
+(Object Storage → Queue → Functions)
 
 ### Data & Storage
 
@@ -55,7 +69,8 @@ All scenarios are designed as **independent but composable building blocks** of 
 
 ### Containers & Images
 
-* **docker-container-registry/** — Private registry, image lifecycle, VM boot from container
+* **docker-container-registry/** — Private registry, image lifecycle,
+VM boot from container
 * **packer/** — Reusable machine images
 
 ### Observability
@@ -86,13 +101,15 @@ This repository follows several core principles:
 * **Isolation** — clear separation of concerns between services and layers
 * **Security-first mindset** — least privilege, encryption, network boundaries
 * **Failure awareness** — high availability and fault-tolerant design
-* **Production-oriented thinking** — realistic architectures instead of simplified demos
+* **Production-oriented thinking** — realistic architectures
+instead of simplified demos
 
 ---
 
 ## Notes on Implementation
 
-Some implementations are **adapted and extended from official documentation and training materials**, including Yandex Cloud resources.
+Some implementations are **adapted and extended from official documentation
+and training materials**, including Yandex Cloud resources.
 
 However, all solutions were:
 
@@ -111,7 +128,8 @@ Not all scenarios currently include diagrams or screenshots.
 This is intentional at the current stage:
 
 * priority is given to **working infrastructure and reproducibility**
-* visuals are added progressively for **complex flows** (e.g., serverless pipelines, networking)
+* visuals are added progressively for **complex flows**
+(e.g., serverless pipelines, networking)
 
 ---
 

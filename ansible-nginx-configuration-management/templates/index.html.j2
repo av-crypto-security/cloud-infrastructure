@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansible NGINX Lab</title>
+</head>
+<body>
+    <h1>NGINX configured by Ansible</h1>
+
+    <p>Managed node: {{ inventory_hostname }}</p>
+    <p>Hostname: {{ ansible_hostname }}</p>
+    <p>Operating system: {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+
+    <p>Configuration management is working.</p>
+</body>
+</html>

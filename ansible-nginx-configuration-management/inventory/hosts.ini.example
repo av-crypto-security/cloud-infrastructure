@@ -1,0 +1,9 @@
+[webservers]
+ansible-node-1 ansible_host=192.168.56.102
+ansible-node-2 ansible_host=192.168.56.104
+
+[webservers:vars]
+ansible_user=labadmin
+ansible_ssh_private_key_file=~/.ssh/id_ed25519_ansible_lab
+# ansible_become=true
+

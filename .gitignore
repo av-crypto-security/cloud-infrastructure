@@ -29,3 +29,20 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Ansible
+*.retry
+.ansible/
+
+# Ansible Vault
+vault-password.txt
+.vault-password
+*.vault
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Local inventory (if using a private inventory)
+**/inventory/hosts.ini
